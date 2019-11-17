@@ -1,0 +1,80 @@
+eureka:
+  client:
+    service-url:
+      #defaultZone: http://192.168.203.38:8762/eureka/
+      #defaultZone: http://localhost:8761/eureka/
+      #defaultZone: http://eureka2:8761/eureka/,http://eureka1:8761/eureka/
+      defaultZone: http://192.168.102.81:8761/eureka/,http://192.168.102.83:8761/eureka/,http://192.168.102.84:8761/eureka/
+  instance:
+    #instance-id: injob对外服务接口-8003,https8002  # 人性化显示出服务的信息
+    prefer-ip-address: true
+server:
+  port: 6872
+
+spring:
+  application:
+    name: ysb-zuul
+    
+
+ribbon:
+  eureka:
+    enabled: false
+  ReadTimeout: 600000
+  ConnectTimeout: 600000 
+  
+zuul:
+  host:
+    connect-timeout-millis: 600000
+    socket-timeout-millis: 600000
+  routes:
+    eureka:
+      path: /eureka/**
+      custom-sensitive-headers: true
+      sensitive-headers:
+      #stripPrefix: false 
+      url: http://localhost:8761/
+    test:
+      path: /test/**
+      sensitive-headers:
+      custom-sensitive-headers: true
+      serviceId: test
+      stripPrefix: true 
+      #url: https://www.baidu.com/
+      
+    ysbmdm:
+      path: /ysbmdm/**
+      sensitive-headers:
+      custom-sensitive-headers: true
+      stripPrefix: false 
+      serviceId: ysbmdm
+
+    wxmd:
+      path: /wxmd/**
+      sensitive-headers:
+      custom-sensitive-headers: true
+      stripPrefix: false 
+      serviceId: wxmd
+
+    
+ysbmdm:
+  ribbon:
+    listOfServers: 192.168.102.83:8772,192.168.102.84:8772
+wxmd:
+  ribbon:
+    listOfServers: 192.168.102.81:8772 
+test:
+  ribbon:
+    listOfServers: www.atguigu.com,www.slimego.cn
+ 
+
+    
+https:
+  port: 7702
+  ssl:
+    key-store: classpath:keystore.jks
+    #key-store-password: 123456
+    #key-password: 123456
+    key-store-password: 84443596086
+    key-password: 84443596086 
+    
+    
