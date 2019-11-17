@@ -1,4 +1,10 @@
 spring:
+  profiles:
+    active:
+    -zuul
+
+---
+spring:
   application:
     name: ysb-zuul
   profiles: zuul
