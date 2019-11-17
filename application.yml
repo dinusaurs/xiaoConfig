@@ -1,7 +1,7 @@
 spring:
   application:
     name: ysb-zuul
-  profiles: ysb-zuul
+  profiles: zuul
 eureka:
   client:
     service-url:
@@ -80,7 +80,7 @@ https:
 spring:
   application:
     name: ysb-system
-  profiles: ysb-system
+  profiles: system
   # 模板引擎
   thymeleaf:
     mode: HTML
